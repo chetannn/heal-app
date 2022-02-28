@@ -3,10 +3,14 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
 
-export default function InputCombobox({ register, label, options }) {
-
-    const [query, setQuery] = useState("");
-    const [selected, setSelected] = useState(options[0]);
+export default function InputCombobox({
+  register,
+  label,
+  options,
+  displayValue,
+}) {
+  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState(options[0]);
 
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -37,7 +41,7 @@ export default function InputCombobox({ register, label, options }) {
                 Nothing found.
               </div>
             ) : (
-                options.map((option) => (
+              options.map((option) => (
                 <Combobox.Option
                   key={option.id}
                   className={({ active }) =>
@@ -54,7 +58,7 @@ export default function InputCombobox({ register, label, options }) {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {option.name}
+                        {option[displayValue]}
                       </span>
                       {selected ? (
                         <span

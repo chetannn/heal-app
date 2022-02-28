@@ -28,7 +28,7 @@ export default function Register() {
         );
 
   function handlRegister(data) {
-    console.log(data)
+    console.log(data);
   }
 
   return (
@@ -57,9 +57,12 @@ export default function Register() {
                   Register as ?
                 </label>
 
-                <InputCombobox label="user_type" register={register} options={people} />
-
-              
+                <InputCombobox
+                  label="user_type"
+                  displayValue="name"
+                  register={register}
+                  options={people}
+                />
               </div>
 
               <div className="mb-4">

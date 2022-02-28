@@ -5,7 +5,7 @@ export default function Input({ register, label, ...props }) {
     <input
       {...props}
       {...register(label)}
-      className="border rounded-lg px-3 py-2 w-full focus:outline-none focus:border-blue-400"
+      className="border border-gray-300 rounded-lg w-full focus:outline-none focus:border-blue-400"
     />
   );
 }

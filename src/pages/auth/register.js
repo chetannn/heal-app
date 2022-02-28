@@ -1,12 +1,35 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Input from "../../components/Input";
 import Link from "next/link";
 import Head from "next/head";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { useState, Fragment } from "react";
+import InputCombobox from "../../components/InputCombobox";
 
 export default function Register() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
-  function handlRegister(data) {}
+  const people = [
+    { id: 1, name: "Doctor" },
+    { id: 2, name: "Patient" },
+    { id: 3, name: "Guest" },
+  ];
+  const [selected, setSelected] = useState(people[0]);
+  const [query, setQuery] = useState("");
+
+  const filteredPeople =
+    query === ""
+      ? people
+      : people.filter((person) =>
+          person.name
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
+        );
+
+  function handlRegister(data) {
+    console.log(data)
+  }
 
   return (
     <>
@@ -29,6 +52,16 @@ export default function Register() {
             </h4>
 
             <form onSubmit={handleSubmit(handlRegister)}>
+              <div className="mb-4">
+                <label className="block text-gray-500 font-normal leading-loose text-sm uppercase mb-2">
+                  Register as ?
+                </label>
+
+                <InputCombobox label="user_type" register={register} options={people} />
+
+              
+              </div>
+
               <div className="mb-4">
                 <label className="block text-gray-500 font-normal leading-loose text-sm uppercase mb-2">
                   Email
